@@ -17,7 +17,7 @@ async def private_receive_handler(c: Client, m: Message):
         await db.add_user(m.from_user.id)
         await c.send_message(
             Var.BIN_CHANNEL,
-            f"#NEW_USER: \n\nNew User [{m.from_user.first_name}](tg://user?id={m.from_user.id}) Started !!"
+            f"#NEW_USER: \n\nPengguna Baru [{m.from_user.first_name}](tg://user?id={m.from_user.id}) Memulai !!"
         )
     if Var.UPDATES_CHANNEL is not None:
         try:
@@ -25,7 +25,7 @@ async def private_receive_handler(c: Client, m: Message):
             if user.status == "kicked":
                 await c.send_message(
                     chat_id=m.chat.id,
-                    text="Sorry Sir, You are Banned to use me. Contact my [Support Group](https://t.me/linux_repo).",
+                    text="Maaf kamu sudah dibanned dari bot ini. Hubungi saya di [Support Group](https://t.me/YMoviezChat).",
                     parse_mode="markdown",
                     disable_web_page_preview=True
                 )
@@ -33,11 +33,11 @@ async def private_receive_handler(c: Client, m: Message):
         except UserNotParticipant:
             await c.send_message(
                 chat_id=m.chat.id,
-                text="**Please Join My Updates Channel to use this Bot!**\n\nDue to Overload, Only Channel Subscribers can use the Bot!",
+                text="**Silahkan gabung channel saya melalui button dibawah!**\n\nHanya subscriber channel yang bisa menggunakan bot ini!",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("🤖 Join Updates Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
+                            InlineKeyboardButton("🔔 Gabung Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
                         ]
                     ]
                 ),
@@ -47,7 +47,7 @@ async def private_receive_handler(c: Client, m: Message):
         except Exception:
             await c.send_message(
                 chat_id=m.chat.id,
-                text="Something went Wrong. Contact my [Support Group](https://t.me/linux_repo).",
+                text="Sepertinya ada yang salah. Hubungi saya di [Support Group](https://t.me/YMoviezChat).",
                 parse_mode="markdown",
                 disable_web_page_preview=True)
             return
@@ -73,11 +73,11 @@ async def private_receive_handler(c: Client, m: Message):
         elif m.audio:
             file_name = f"{m.audio.file_name}"
 
-        msg_text = "Bruh! 😁\nYour Link Generated! 🤓\n\n📂 **File Name:** `{}`\n**File Size:** `{}`\n\n📥 **Download Link:** `{}`"
+        msg_text = "Yess! 😁\nLink mu sudah digenerate! 🤓\n\n📂 **Nama File:** `{}`\n**Ukuran File:** `{}`\n\n📥 **Download Link:** `{}`"
         await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**User ID:** `{m.from_user.id}`\n**Download Link:** {stream_link}", disable_web_page_preview=True, parse_mode="Markdown", quote=True)
         await m.reply_text(
             text=msg_text.format(file_name, file_size, stream_link),
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Download Now", url=stream_link)]]),
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Download Sekarang", url=stream_link)]]),
             quote=True
         )
     except FloodWait as e:
@@ -94,7 +94,7 @@ async def channel_receive_handler(bot, broadcast):
     try:
         log_msg = await broadcast.forward(chat_id=Var.BIN_CHANNEL)
         await log_msg.reply_text(
-            text=f"**Channel Name:** `{broadcast.chat.title}`\n**Channel ID:** `{broadcast.chat.id}`\n**Link:** https://t.me/AH_File2Link_Bot?start=AbirHasan2005_{str(log_msg.message_id)}",
+            text=f"**Nama Channel:** `{broadcast.chat.title}`\n**Channel ID:** `{broadcast.chat.id}`\n**Link:** https://t.me/YasirRoBot?start=YasirPedia_{str(log_msg.message_id)}",
             quote=True,
             parse_mode="Markdown"
         )
@@ -103,7 +103,7 @@ async def channel_receive_handler(bot, broadcast):
             message_id=broadcast.message_id,
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton("Get Direct Download Link", url=f"https://t.me/AH_File2Link_Bot?start=AbirHasan2005_{str(log_msg.message_id)}")]
+                    [InlineKeyboardButton("⬇️ Klik Untuk Generate Link", url=f"https://t.me/YasirRoBot?start=YasirPedia_{str(log_msg.message_id)}")]
                 ]
             )
         )
@@ -115,4 +115,4 @@ async def channel_receive_handler(bot, broadcast):
                              disable_web_page_preview=True, parse_mode="Markdown")
     except Exception as e:
         await bot.send_message(chat_id=Var.BIN_CHANNEL, text=f"#ERROR_TRACEBACK: `{e}`", disable_web_page_preview=True, parse_mode="Markdown")
-        print(f"Can't Edit Broadcast Message!\nError: {e}")
+        print(f"Tidak bisa mengedit pesan broadcast!\nError: {e}")
