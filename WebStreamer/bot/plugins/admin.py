@@ -20,7 +20,7 @@ broadcast_ids = {}
 @StreamBot.on_message(filters.command("status") & filters.private & filters.user(Var.OWNER_ID) & ~filters.edited)
 async def sts(c: Client, m: Message):
     total_users = await db.total_users_count()
-    await m.reply_text(text=f"**Total Users in DB:** `{total_users}`", parse_mode="Markdown", quote=True)
+    await m.reply_text(text=f"**Total pengguna bot ini:** `{total_users}`", parse_mode="Markdown", quote=True)
 
 
 @StreamBot.on_message(filters.command("broadcast") & filters.private & filters.user(Var.OWNER_ID) & filters.reply & ~filters.edited)
@@ -32,7 +32,7 @@ async def broadcast_(c, m):
         if not broadcast_ids.get(broadcast_id):
             break
     out = await m.reply_text(
-        text=f"Broadcast initiated! You will be notified with log file when all the users are notified."
+        text=f"Broadcast dimulai! Anda akan diberitahu dengan file log ketika semua pengguna diberitahu."
     )
     start_time = time.time()
     total_users = await db.total_users_count()
@@ -77,13 +77,13 @@ async def broadcast_(c, m):
     await out.delete()
     if failed == 0:
         await m.reply_text(
-            text=f"broadcast completed in `{completed_in}`\n\nTotal users {total_users}.\nTotal done {done}, {success} success and {failed} failed.",
+            text=f"Broadcast selesai dalam `{completed_in}`\n\nTotal pengguna {total_users}.\nTotal selesai {done}, {success} sukses dan {failed} gagal.",
             quote=True
         )
     else:
         await m.reply_document(
             document='broadcast.txt',
-            caption=f"broadcast completed in `{completed_in}`\n\nTotal users {total_users}.\nTotal done {done}, {success} success and {failed} failed.",
+            caption=f"broadcast selesai dalam `{completed_in}`\n\nTotal pengguna {total_users}.\nTotal selesai {done}, {success} sukses dan {failed} gagal.",
             quote=True
         )
     os.remove('broadcast.txt')
