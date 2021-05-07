@@ -16,7 +16,7 @@ async def start(b, m):
         await db.add_user(m.from_user.id)
         await b.send_message(
             Var.BIN_CHANNEL,
-            f"#NEW_USER: \n\nNew User [{m.from_user.first_name}](tg://user?id={m.from_user.id}) Started !!"
+            f"#NEW_USER: \n\nPengguna Baru [{m.from_user.first_name}](tg://user?id={m.from_user.id}) Dimulai !!"
         )
     usr_cmd = m.text.split("_")[-1]
     if usr_cmd == "/start":
@@ -26,7 +26,7 @@ async def start(b, m):
                 if user.status == "kicked":
                     await b.send_message(
                         chat_id=m.chat.id,
-                        text="Sorry Sir, You are Banned to use me. Contact my [Support Group](https://t.me/linux_repo).",
+                        text="Maaf, kamu dibanned dari bot ini. Hubungi saya di [Support Group](https://t.me/YMoviezChat).",
                         parse_mode="markdown",
                         disable_web_page_preview=True
                     )
@@ -34,11 +34,11 @@ async def start(b, m):
             except UserNotParticipant:
                 await b.send_message(
                     chat_id=m.chat.id,
-                    text="**Please Join My Updates Channel to use this Bot!**\n\nDue to Overload, Only Channel Subscribers can use the Bot!",
+                    text="**Silahkan gabung channel saya melalui button dibawah ini!**\n\nHanya yang sudah gabung channel saya yang bisa menggunakan bot ini",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("🤖 Join Updates Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
+                                InlineKeyboardButton("🔔 Gabung Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
                             ]
                         ]
                     ),
@@ -48,16 +48,16 @@ async def start(b, m):
             except Exception:
                 await b.send_message(
                     chat_id=m.chat.id,
-                    text="Something went Wrong. Contact my [Support Group](https://t.me/linux_repo).",
+                    text="Seperti nya ada yang salah. Hubungi saya di [Support Group](https://t.me/YMovieZChat).",
                     parse_mode="markdown",
                     disable_web_page_preview=True)
                 return
         await m.reply_text(
-            text='🙋 Hey Bruh!!\nI am Instant Telegram File to Link Generator Bot.\n\nSend me any file & see the magic!',
+            text='🙋 Halo gaesss!!\nAku adalah Link Generator Bot.\n\nKirimkan aku sebuah file dan lihatlah sebuah keajaiban!\n\nCredit Source by @AbirHasan2005 and Translated by @YasirArisM.',
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton('Bots Channel', url='https://t.me/Discovery_Updates'), InlineKeyboardButton('Support Group', url='https://t.me/linux_repo')],
-                    [InlineKeyboardButton('Developer', url='https://t.me/AbirHasan2005')]
+                    [InlineKeyboardButton('YMovieZ Channel', url='https://t.me/YMovieZNew'), InlineKeyboardButton('Support Group', url='https://t.me/YMoviezChat')],
+                    [InlineKeyboardButton('My Blog', url='https://www.yasir.my.id')]
                 ]
             ),
             disable_web_page_preview=True
@@ -69,7 +69,7 @@ async def start(b, m):
                 if user.status == "kicked":
                     await b.send_message(
                         chat_id=m.chat.id,
-                        text="Sorry Sir, You are Banned to use me. Contact my [Support Group](https://t.me/linux_repo).",
+                        text="Maaf, kamu sudah dibanned dari bot ini. Hubungi saya di [Support Group](https://t.me/YMoviezChat).",
                         parse_mode="markdown",
                         disable_web_page_preview=True
                     )
@@ -77,15 +77,15 @@ async def start(b, m):
             except UserNotParticipant:
                 await b.send_message(
                     chat_id=m.chat.id,
-                    text="**Please Join My Updates Channel to use this Bot!**\n\nDue to Overload, Only Channel Subscribers can use the Bot!",
+                    text="**Untuk menggunakan bot ini silahkan gabung channel saya melalui button dibawah ini!**\n\nHanya subscriber channel yang bisa menggunakan bot ini!",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("🤖 Join Updates Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
+                                InlineKeyboardButton("🔔 Gabung Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
                             ],
                             [
-                                InlineKeyboardButton("🔄 Refresh / Try Again",
-                                                     url=f"https://t.me/AH_File2Link_Bot?start=AbirHasan2005_{usr_cmd}")
+                                InlineKeyboardButton("🔄 Refresh / Coba Lagi",
+                                                     url=f"https://t.me/YasirRoBot?start=YasirPedia_{usr_cmd}")
                             ]
                         ]
                     ),
@@ -95,7 +95,7 @@ async def start(b, m):
             except Exception:
                 await b.send_message(
                     chat_id=m.chat.id,
-                    text="Something went Wrong. Contact my [Support Group](https://t.me/linux_repo).",
+                    text="Seperti nya ada yang salah. Hubungi saya di [Support Group](https://t.me/YMoviezChat).",
                     parse_mode="markdown",
                     disable_web_page_preview=True)
                 return
@@ -123,11 +123,11 @@ async def start(b, m):
                                      Var.PORT,
                                      get_msg.message_id)
 
-        msg_text = "Bruh! 😁\nYour Link Generated! 🤓\n\n📂 **File Name:** `{}`\n**File Size:** `{}`\n\n📥 **Download Link:** `{}`"
+        msg_text = "Yeaaayyyy! 😁\nLink kamu berhasil di generate! 🤓\n\n📂 **Nama File:** `{}`\n**Ukuran File:** `{}`\n\n📥 **Download Link:** `{}`\n\n**Catatan:** Klik tombol untuk mendownload"
         await m.reply_text(
             text=msg_text.format(file_name, file_size, stream_link),
             parse_mode="Markdown",
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Download Now", url=stream_link)]])
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Download Sekarang", url=stream_link)]])
         )
 
 
@@ -137,7 +137,7 @@ async def help_handler(bot, message):
         await db.add_user(message.from_user.id)
         await bot.send_message(
             Var.BIN_CHANNEL,
-            f"#NEW_USER: \n\nNew User [{message.from_user.first_name}](tg://user?id={message.from_user.id}) Started !!"
+            f"#NEW_USER: \n\nPengguna Baru [{message.from_user.first_name}](tg://user?id={message.from_user.id}) Memulai !!"
         )
     if Var.UPDATES_CHANNEL is not None:
         try:
@@ -145,7 +145,7 @@ async def help_handler(bot, message):
             if user.status == "kicked":
                 await bot.send_message(
                     chat_id=message.chat.id,
-                    text="Sorry Sir, You are Banned to use me. Contact my [Support Group](https://t.me/linux_repo).",
+                    text="Maaf, kamu sudah dibanned dari bot ini. Hubungi saya di [Support Group](https://t.me/YMoviezChat).",
                     parse_mode="markdown",
                     disable_web_page_preview=True
                 )
@@ -153,11 +153,11 @@ async def help_handler(bot, message):
         except UserNotParticipant:
             await bot.send_message(
                 chat_id=message.chat.id,
-                text="**Please Join My Updates Channel to use this Bot!**\n\nDue to Overload, Only Channel Subscribers can use the Bot!",
+                text="**Silahkan gabung channel saya untuk menggunakan bot ini!**\n\nHanya subscriber channel yang bisa menggunakan bot ini!",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("🤖 Join Updates Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
+                            InlineKeyboardButton("🔔 Gabung Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
                         ]
                     ]
                 ),
@@ -172,12 +172,12 @@ async def help_handler(bot, message):
                 disable_web_page_preview=True)
             return
     await message.reply_text(
-        text="Send me any File I will provide External Direct Download Link!\n\nAlso I am Supported in Channels. Add me to Channel as Admin to Make Me Workable!",
+        text="Kirimkan aku sebuah file dan aku akan mengubah nya menjadi direct link!\n\nAku juga mendukung Channels loh. Tambahkan aku ke channel supaya aku bekerja!",
         parse_mode="Markdown",
         disable_web_page_preview=True,
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton("Support Group", url="https://t.me/linux_repo"), InlineKeyboardButton("Bots Channel", url="https://t.me/Discovery_Updates")],
+                [InlineKeyboardButton("Support Group", url="https://t.me/YMoviezChat"), InlineKeyboardButton("YMovieZ Channel", url="https://t.me/YMovieZNew")],
                 [InlineKeyboardButton("Developer", url="https://t.me/AbirHasan2005")]
             ]
         )
