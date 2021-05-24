@@ -19,7 +19,7 @@ async def private_receive_handler(c: Client, m: Message):
             Var.BIN_CHANNEL,
             f"#NEW_USER: \n\nPengguna Baru [{m.from_user.first_name}](tg://user?id={m.from_user.id}) Memulai !!"
         )
-    if Var.UPDATES_CHANNEL is not None:
+    if Var.UPDATES_CHANNEL != "None":
         try:
             user = await c.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
             if user.status == "kicked":
