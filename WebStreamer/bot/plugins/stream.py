@@ -19,38 +19,6 @@ async def private_receive_handler(c: Client, m: Message):
             Var.BIN_CHANNEL,
             f"#NEW_USER: \n\nPengguna Baru [{m.from_user.first_name}](tg://user?id={m.from_user.id}) Memulai !!"
         )
-    if Var.UPDATES_CHANNEL != "None":
-        try:
-            user = await c.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
-            if user.status == "kicked":
-                await c.send_message(
-                    chat_id=m.chat.id,
-                    text="Maaf kamu sudah dibanned dari bot ini. Hubungi saya di [Support Group](https://t.me/YMoviezChat).",
-                    parse_mode="markdown",
-                    disable_web_page_preview=True
-                )
-                return
-        except UserNotParticipant:
-            await c.send_message(
-                chat_id=m.chat.id,
-                text="**Silahkan gabung channel saya melalui button dibawah!**\n\nHanya subscriber channel yang bisa menggunakan bot ini!",
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton("🔔 Gabung Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
-                        ]
-                    ]
-                ),
-                parse_mode="markdown"
-            )
-            return
-        except Exception:
-            await c.send_message(
-                chat_id=m.chat.id,
-                text="Sepertinya ada yang salah. Hubungi saya di [Support Group](https://t.me/YMoviezChat).",
-                parse_mode="markdown",
-                disable_web_page_preview=True)
-            return
     try:
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         stream_link = "https://link.yasir.my.id/{}".format(log_msg.message_id) if Var.ON_HEROKU or Var.NO_PORT else \
