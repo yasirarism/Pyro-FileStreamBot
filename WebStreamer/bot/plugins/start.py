@@ -20,38 +20,6 @@ async def start(b, m):
         )
     usr_cmd = m.text.split("_")[-1]
     if usr_cmd == "/start":
-        if Var.UPDATES_CHANNEL != "None":
-            try:
-                user = await b.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
-                if user.status == "kicked":
-                    await b.send_message(
-                        chat_id=m.chat.id,
-                        text="Maaf, kamu dibanned dari bot ini. Hubungi saya di [Support Group](https://t.me/YMoviezChat).",
-                        parse_mode="markdown",
-                        disable_web_page_preview=True
-                    )
-                    return
-            except UserNotParticipant:
-                await b.send_message(
-                    chat_id=m.chat.id,
-                    text="**Silahkan gabung channel saya melalui button dibawah ini!**\n\nHanya yang sudah gabung channel saya yang bisa menggunakan bot ini",
-                    reply_markup=InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton("🔔 Gabung Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
-                            ]
-                        ]
-                    ),
-                    parse_mode="markdown"
-                )
-                return
-            except Exception:
-                await b.send_message(
-                    chat_id=m.chat.id,
-                    text="Seperti nya ada yang salah. Hubungi saya di [Support Group](https://t.me/YMovieZChat).",
-                    parse_mode="markdown",
-                    disable_web_page_preview=True)
-                return
         await m.reply_text(
             text='🙋 Halo gaesss!!\nAku adalah Link Generator Bot.\n\nKirimkan aku sebuah file dan lihatlah sebuah keajaiban!\n\nCredit Source by @AbirHasan2005 and Translated by @YasirArisM.',
             reply_markup=InlineKeyboardMarkup(
@@ -63,43 +31,6 @@ async def start(b, m):
             disable_web_page_preview=True
         )
     else:
-        if Var.UPDATES_CHANNEL != "None":
-            try:
-                user = await b.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
-                if user.status == "kicked":
-                    await b.send_message(
-                        chat_id=m.chat.id,
-                        text="Maaf, kamu sudah dibanned dari bot ini. Hubungi saya di [Support Group](https://t.me/YMoviezChat).",
-                        parse_mode="markdown",
-                        disable_web_page_preview=True
-                    )
-                    return
-            except UserNotParticipant:
-                await b.send_message(
-                    chat_id=m.chat.id,
-                    text="**Untuk menggunakan bot ini silahkan gabung channel saya melalui button dibawah ini!**\n\nHanya subscriber channel yang bisa menggunakan bot ini!",
-                    reply_markup=InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton("🔔 Gabung Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
-                            ],
-                            [
-                                InlineKeyboardButton("🔄 Refresh / Coba Lagi",
-                                                     url=f"https://t.me/YasirRoBot?start=YasirPedia_{usr_cmd}")
-                            ]
-                        ]
-                    ),
-                    parse_mode="markdown"
-                )
-                return
-            except Exception:
-                await b.send_message(
-                    chat_id=m.chat.id,
-                    text="Seperti nya ada yang salah. Hubungi saya di [Support Group](https://t.me/YMoviezChat).",
-                    parse_mode="markdown",
-                    disable_web_page_preview=True)
-                return
-
         get_msg = await b.get_messages(chat_id=Var.BIN_CHANNEL, message_ids=int(usr_cmd))
 
         file_size = None
@@ -139,38 +70,6 @@ async def help_handler(bot, message):
             Var.BIN_CHANNEL,
             f"#NEW_USER: \n\nPengguna Baru [{message.from_user.first_name}](tg://user?id={message.from_user.id}) Memulai !!"
         )
-    if Var.UPDATES_CHANNEL != "None":
-        try:
-            user = await bot.get_chat_member(Var.UPDATES_CHANNEL, message.chat.id)
-            if user.status == "kicked":
-                await bot.send_message(
-                    chat_id=message.chat.id,
-                    text="Maaf, kamu sudah dibanned dari bot ini. Hubungi saya di [Support Group](https://t.me/YMoviezChat).",
-                    parse_mode="markdown",
-                    disable_web_page_preview=True
-                )
-                return
-        except UserNotParticipant:
-            await bot.send_message(
-                chat_id=message.chat.id,
-                text="**Silahkan gabung channel saya untuk menggunakan bot ini!**\n\nHanya subscriber channel yang bisa menggunakan bot ini!",
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton("🔔 Gabung Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
-                        ]
-                    ]
-                ),
-                parse_mode="markdown"
-            )
-            return
-        except Exception:
-            await bot.send_message(
-                chat_id=message.chat.id,
-                text="Something went Wrong. Contact my [Support Group](https://t.me/linux_repo).",
-                parse_mode="markdown",
-                disable_web_page_preview=True)
-            return
     await message.reply_text(
         text="Kirimkan aku sebuah file dan aku akan mengubah nya menjadi direct link!\n\nAku juga mendukung Channels loh. Tambahkan aku ke channel supaya aku bekerja!",
         parse_mode="Markdown",
@@ -178,7 +77,7 @@ async def help_handler(bot, message):
         reply_markup=InlineKeyboardMarkup(
             [
                 [InlineKeyboardButton("Support Group", url="https://t.me/YMoviezChat"), InlineKeyboardButton("YMovieZ Channel", url="https://t.me/YMovieZNew")],
-                [InlineKeyboardButton("Developer", url="https://t.me/AbirHasan2005")]
+                [InlineKeyboardButton("OriginalDeveloper", url="https://t.me/AbirHasan2005")]
             ]
         )
     )
