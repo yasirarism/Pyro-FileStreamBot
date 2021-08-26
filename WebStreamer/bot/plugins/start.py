@@ -49,7 +49,7 @@ async def start(b, m):
         elif get_msg.audio:
             file_name = f"{get_msg.audio.file_name}"
 
-        stream_link = "https://link.yasir.my.id/{}".format(get_msg.message_id) if Var.ON_HEROKU or Var.NO_PORT else \
+        stream_link = "https://yasirlink.ga/{}".format(get_msg.message_id) if Var.ON_HEROKU or Var.NO_PORT else \
             "http://{}:{}/{}".format(Var.FQDN,
                                      Var.PORT,
                                      get_msg.message_id)
