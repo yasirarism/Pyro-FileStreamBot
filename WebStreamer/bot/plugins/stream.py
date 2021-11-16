@@ -13,7 +13,7 @@ db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
 
 @StreamBot.on_callback_query()
 def donate(client, callback_query):
-    callback_query.answer(f"Button contains: '{callback_query.data}'", show_alert=True)
+    callback_query.answer(f"Jika menurut kamu bot ini berguna, kamu bisa donasi seikhlasnya dengan chat @YasirArisM. Terimakasih..", show_alert=True)
 
 @StreamBot.on_message(filters.private & (filters.document | filters.video | filters.audio) & ~filters.edited, group=4)
 async def private_receive_handler(c: Client, m: Message):
