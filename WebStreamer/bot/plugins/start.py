@@ -30,7 +30,7 @@ async def start(b, m):
             ),
             disable_web_page_preview=True
         )
-    elif m.text == "/start help":
+    elif m.text == "/start donate":
         await m.reply_text(
             text='🌟 Jika kamu merasa bot ini sangat bermanfaat, kamu bisa donasi melalui link dan nomer dibawah ini. Berapapun nilainya saya sangat berterimakasih, jika ada kendala kamu bisa chat ke @YasirArisM. Thanks you.. \n\n~ <b>Saweria :</b> https://saweria.co/yasirarism\n~ <b>Dana :</b> 088220143804',
             disable_web_page_preview=True
