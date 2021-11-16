@@ -11,6 +11,10 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
 
 
+@StreamBot.on_callback_query()
+def donate(client, callback_query):
+    callback_query.answer(f"Button contains: '{callback_query.data}'", show_alert=True)
+
 @StreamBot.on_message(filters.private & (filters.document | filters.video | filters.audio) & ~filters.edited, group=4)
 async def private_receive_handler(c: Client, m: Message):
     if not await db.is_user_exist(m.from_user.id):
@@ -41,11 +45,16 @@ async def private_receive_handler(c: Client, m: Message):
         elif m.audio:
             file_name = f"{m.audio.file_name}"
 
-        msg_text = "Yess! 😁\nLink mu sudah digenerate! 🤓\n\n📂 **Nama File:** `{}`\n**Ukuran File:** `{}`\n\n📥 **Download Link:** `{}`"
+        msg_text = "Yeayy! 😁\nLink mu sudah digenerate! 🤓\n\n📂 **Nama File:** `{}`\n**Ukuran File:** `{}`\n\n📥 **Download Link:** `{}`"
         await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**User ID:** `{m.from_user.id}`\n**Download Link:** {stream_link}", disable_web_page_preview=True, parse_mode="Markdown", quote=True)
         await m.reply_text(
             text=msg_text.format(file_name, file_size, stream_link),
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Download Sekarang", url=stream_link)]]),
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [InlineKeyboardButton('💰 Donate', callback_data='donate')],
+                    [InlineKeyboardButton("⬇️ Download Link", url=f"https://t.me/YasirRoBot?start=YasirPedia_{str(log_msg.message_id)}")]
+                ]
+            ),
             quote=True
         )
     except FloodWait as e:
@@ -71,7 +80,8 @@ async def channel_receive_handler(bot, broadcast):
             message_id=broadcast.message_id,
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton("⬇️ Klik Untuk Generate Link", url=f"https://t.me/YasirRoBot?start=YasirPedia_{str(log_msg.message_id)}")]
+                    [InlineKeyboardButton('🎬 Subtitles', url='https://yasirsub.cf'), InlineKeyboardButton('💰 Donate', callback_data='donate')],
+                    [InlineKeyboardButton("⬇️ Download Link", url=f"https://t.me/YasirRoBot?start=YasirPedia_{str(log_msg.message_id)}")]
                 ]
             )
         )
