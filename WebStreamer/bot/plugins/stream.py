@@ -51,8 +51,8 @@ async def private_receive_handler(c: Client, m: Message):
             text=msg_text.format(file_name, file_size, stream_link),
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton('💰 Donate', callback_data='donate')],
-                    [InlineKeyboardButton("⬇️ Download Link", url=f"https://t.me/YasirRoBot?start=YasirPedia_{str(log_msg.message_id)}")]
+                    [InlineKeyboardButton('💰 Donate', url='https://t.me/YasirRoBot?start=donate')],
+                    [InlineKeyboardButton("⬇️ Download Link", url=f"{stream_link}")]
                 ]
             ),
             quote=True
@@ -80,7 +80,7 @@ async def channel_receive_handler(bot, broadcast):
             message_id=broadcast.message_id,
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton('🎬 Subtitles', url='https://yasirsub.cf'), InlineKeyboardButton('💰 Donate', callback_data='donate')],
+                    [InlineKeyboardButton('🎬 Subtitles', url='https://yasirsub.cf'), InlineKeyboardButton('💰 Donate', url='https://t.me/YasirRoBot?start=donate')],
                     [InlineKeyboardButton("⬇️ Download Link", url=f"https://t.me/YasirRoBot?start=YasirPedia_{str(log_msg.message_id)}")]
                 ]
             )
