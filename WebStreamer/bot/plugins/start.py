@@ -54,10 +54,11 @@ async def start(b, m):
         elif get_msg.audio:
             file_name = f"{get_msg.audio.file_name}"
 
-        stream_link = "https://yasirlink.ga/{}".format(get_msg.message_id) if Var.ON_HEROKU or Var.NO_PORT else \
-            "http://{}:{}/{}".format(Var.FQDN,
-                                     Var.PORT,
-                                     get_msg.message_id)
+        stream_link = (
+            f"https://yasirlink.ga/{get_msg.message_id}"
+            if Var.ON_HEROKU or Var.NO_PORT
+            else f"http://{Var.FQDN}:{Var.PORT}/{get_msg.message_id}"
+        )
 
         msg_text = "Yeaaayyyy! 😁\nLink kamu berhasil di generate! 🤓\n\n📂 **Nama File:** `{}`\n**Ukuran File:** `{}`\n\n📥 **Download Link:** `{}`\n\n**Catatan:** Klik tombol untuk mendownload"
         await m.reply_text(

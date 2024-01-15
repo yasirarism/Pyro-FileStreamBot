@@ -16,9 +16,13 @@ routes = web.RouteTableDef()
 @routes.get("/", allow_head=True)
 async def root_route_handler(request):
     bot_details = await StreamBot.get_me()
-    return web.json_response({"status": "running",
-                              "server_permission": "Open",
-                              "telegram_bot": '@'+bot_details.username})
+    return web.json_response(
+        {
+            "status": "running",
+            "server_permission": "Open",
+            "telegram_bot": f'@{bot_details.username}',
+        }
+    )
 
 
 @routes.get("/{message_id}")

@@ -13,7 +13,10 @@ db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
 
 @StreamBot.on_callback_query()
 def donate(client, callback_query):
-    callback_query.answer(f"Jika menurut kamu bot ini berguna, kamu bisa donasi seikhlasnya dengan chat @YasirArisM. Terimakasih..", show_alert=True)
+    callback_query.answer(
+        "Jika menurut kamu bot ini berguna, kamu bisa donasi seikhlasnya dengan chat @YasirArisM. Terimakasih..",
+        show_alert=True,
+    )
 
 @StreamBot.on_message(filters.private & (filters.document | filters.video | filters.audio) & ~filters.edited, group=4)
 async def private_receive_handler(c: Client, m: Message):
@@ -25,10 +28,11 @@ async def private_receive_handler(c: Client, m: Message):
         )
     try:
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
-        stream_link = "https://yasirlink.ga/{}".format(log_msg.message_id) if Var.ON_HEROKU or Var.NO_PORT else \
-            "http://{}:{}/{}".format(Var.FQDN,
-                                    Var.PORT,
-                                    log_msg.message_id)
+        stream_link = (
+            f"https://yasirlink.ga/{log_msg.message_id}"
+            if Var.ON_HEROKU or Var.NO_PORT
+            else f"http://{Var.FQDN}:{Var.PORT}/{log_msg.message_id}"
+        )
         file_size = None
         if m.video:
             file_size = f"{humanbytes(m.video.file_size)}"

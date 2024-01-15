@@ -33,12 +33,12 @@ async def start_services():
             patt = Path(a.name)
             plugin_name = patt.stem.replace(".py", "")
             plugins_dir = Path(f"WebStreamer/bot/plugins/{plugin_name}.py")
-            import_path = ".plugins.{}".format(plugin_name)
+            import_path = f".plugins.{plugin_name}"
             spec = importlib.util.spec_from_file_location(import_path, plugins_dir)
             load = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(load)
-            sys.modules["WebStreamer.bot.plugins." + plugin_name] = load
-            print("Imported => " + plugin_name)
+            sys.modules[f"WebStreamer.bot.plugins.{plugin_name}"] = load
+            print(f"Imported => {plugin_name}")
     print('\n')
     print('------------------- Initalizing Web Server -------------------')
     app = web.AppRunner(await web_server())
@@ -47,10 +47,12 @@ async def start_services():
     await web.TCPSite(app, bind_address, Var.PORT).start()
     print('\n')
     print('----------------------- Service Started -----------------------')
-    print('                        bot =>> {}'.format((await StreamBot.get_me()).first_name))
-    print('                        server ip =>> {}:{}'.format(bind_address, Var.PORT))
+    print(
+        f'                        bot =>> {(await StreamBot.get_me()).first_name}'
+    )
+    print(f'                        server ip =>> {bind_address}:{Var.PORT}')
     if Var.ON_HEROKU:
-        print('                        app runnng on =>> {}'.format(Var.FQDN))
+        print(f'                        app runnng on =>> {Var.FQDN}')
     print('---------------------------------------------------------------')
     await idle()
 
